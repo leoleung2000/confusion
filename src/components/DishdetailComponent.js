@@ -7,17 +7,13 @@ class DishDetail extends Component{
         super(props);
     }
     
-    printDate(input_str){
-        var date = new Date(input_str);
-        return date.toLocaleString('en-us', { month: 'short' }) + " " + date.getDay() + ", " + date.getFullYear();
-    }
     renderComments(comments){
         if (comments != null){
             const commentsComponent = comments.map((comment)=>{
                 return (
                     <ul className="list-unstyled">
                         <li>{comment.comment}</li>
-                        <li>-- {comment.author}, {this.printDate(comment.date)}</li>
+                        <li>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
                     </ul>
                 );
             });
@@ -38,19 +34,21 @@ class DishDetail extends Component{
         {
             const commentDiv = this.renderComments(this.props.dish.comments);
             return (
-                <div className="row">
-                    <div className = "col-12 col-md-5 m-1">
-                        <Card >
-                            <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
-                            <CardBody>
-                            <CardTitle>{this.props.dish.name}</CardTitle>
-                            <CardText>{this.props.dish.description}</CardText>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        <h4>Comment</h4>
-                        { commentDiv }
+                <div className="container">
+                    <div className="row">
+                        <div className = "col-12 col-md-5 m-1">
+                            <Card >
+                                <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
+                                <CardBody>
+                                <CardTitle>{this.props.dish.name}</CardTitle>
+                                <CardText>{this.props.dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            <h4>Comment</h4>
+                            { commentDiv }
+                        </div>
                     </div>
                 </div>
             );
