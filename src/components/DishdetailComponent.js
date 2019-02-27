@@ -7,13 +7,17 @@ class DishDetail extends Component{
         super(props);
     }
     
+    printDate(input_str){
+        var date = new Date(input_str);
+        return date.toLocaleString('en-us', { month: 'short' }) + " " + date.getDay() + ", " + date.getFullYear();
+    }
     renderComments(comments){
         if (comments != null){
             const commentsComponent = comments.map((comment)=>{
                 return (
                     <ul className="list-unstyled">
                         <li>{comment.comment}</li>
-                        <li>-- {comment.author}, {comment.date}</li>
+                        <li>-- {comment.author}, {this.printDate(comment.date)}</li>
                     </ul>
                 );
             });
