@@ -39,6 +39,9 @@ class Header extends Component {
                             <NavItem>
                                 <NavLink className="nav-link" to='/contactus'><span className="fa fa-address-card fa-lg"></span> Contact Us</NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink className="nav-link" to='/materialUI'><span className="fa fa-google fa-lg"></span> Material UI Playground</NavLink>
+                            </NavItem>
                             </Nav>
                         </Collapse>
                     </div>

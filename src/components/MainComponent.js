@@ -11,6 +11,7 @@ import Contact from './ContactComponent';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DishDetail from './DishdetailComponent';
 import About from './AboutComponent';
+import MediaCard from './MaterialUIComponent';
 
 
 class Main extends Component {
@@ -53,6 +54,7 @@ class Main extends Component {
               <Route path='/menu/:dishId' component={DishWithId} />
               <Route exact path='/contactus' component={Contact} />} />
               <Route exact path='/aboutus' component={() => <About leaders={this.state.leaders} />} />
+              <Route exact path='/materialUI' component={MediaCard} />} />
               <Redirect to="/home" />
           </Switch>
         <Footer />
