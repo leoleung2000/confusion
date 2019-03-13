@@ -4,7 +4,7 @@ import { Card, CardImg, CardText, CardBody,
     Modal, ModalHeader, ModalBody , Button , Form, FormGroup, Label, Input
     } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 class CommentForm extends Component{
 
@@ -41,22 +41,26 @@ class CommentForm extends Component{
                         <Form onSubmit={this.handleCommentSubmit}>
                             <FormGroup>
                                 <Label htmlFor="rating">Rating</Label>
-                                <Input type="select" name="select" id="rating">
+                                <Control.select model=".rating" name="rating" id="rating"
+                                    className="form-control">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>                                
-                                </Input>
+                                </Control.select>
                             </FormGroup>                        
                             <FormGroup>
                                 <Label htmlFor="username">Your Name</Label>
-                                <Input type="text" id="username" name="username" placeholder="Your Name"
-                                    innerRef={(input) => this.username = input} />
+                                <Control.text model=".author" id="author" name="author"
+                                    placeholder="Your Name"
+                                    className="form-control"
+                                        />
                             </FormGroup>
                             <FormGroup>
-                                <Label htmlFor="comment">Commenrt</Label>
-                                <Input type="textarea" name="text" id="comment" rows="5"/>
+                                <Label htmlFor="comment">Comment</Label>
+                                <Control.textarea model=".comment" name="comment" id="comment" rows="6"
+                                    className="form-control"/>
                             </FormGroup>
                             <Button type="submit" value="submit" color="primary">Submit</Button>
                         </Form>
