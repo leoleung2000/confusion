@@ -22,9 +22,9 @@ class CommentForm extends Component{
         this.toggleModal         = this.toggleModal.bind(this);
     }
 
-    handleCommentSubmit(event){
+    handleCommentSubmit(values){
+        alert('Current State is: ' + JSON.stringify(values));
         this.toggleModal();
-        event.preventDefault();
     }
 
     toggleModal() {
@@ -41,7 +41,7 @@ class CommentForm extends Component{
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
-                        <LocalForm onSubmit={this.handleCommentSubmit}>
+                        <LocalForm onSubmit={(values) => this.handleCommentSubmit(values)}>
                             <FormGroup>
                                 <Label htmlFor="rating">Rating</Label>
                                 <Control.select model=".rating" name="rating" id="rating"
