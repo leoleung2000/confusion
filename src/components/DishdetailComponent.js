@@ -1,10 +1,13 @@
 import React , {Component} from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem,
-    Modal, ModalHeader, ModalBody , Button , Form, FormGroup, Label, Input
-    } from 'reactstrap';
+    Modal, ModalHeader, ModalBody , Button , 
+    FormGroup, Label  } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => val && (val.length >= len);
 
 class CommentForm extends Component{
 
@@ -38,7 +41,7 @@ class CommentForm extends Component{
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={this.handleCommentSubmit}>
+                        <LocalForm onSubmit={this.handleCommentSubmit}>
                             <FormGroup>
                                 <Label htmlFor="rating">Rating</Label>
                                 <Control.select model=".rating" name="rating" id="rating"
@@ -55,7 +58,19 @@ class CommentForm extends Component{
                                 <Control.text model=".author" id="author" name="author"
                                     placeholder="Your Name"
                                     className="form-control"
-                                        />
+                                    validators={{
+                                        minLength: minLength(3), 
+                                        maxLength: maxLength(15)
+                                    }} />
+                                <Errors
+                                    className="text-danger"
+                                    model=".author"
+                                    show="touched"
+                                    messages={{
+                                        minLength: 'Must be greater than 2 characters',
+                                        maxLength: 'Must be 15 characters or less'
+                                    }}
+                                    />
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor="comment">Comment</Label>
@@ -63,7 +78,7 @@ class CommentForm extends Component{
                                     className="form-control"/>
                             </FormGroup>
                             <Button type="submit" value="submit" color="primary">Submit</Button>
-                        </Form>
+                        </LocalForm>
                     </ModalBody>
                 </Modal>
             </div>
@@ -110,6 +125,10 @@ function RenderComments({comments}) {
                 <h4>Comment</h4>
                 {commentsComponent}
                 <CommentForm/>
+
+                <LocalForm>
+
+                </LocalForm>
             </div>
         )
     }
